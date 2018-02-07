@@ -1,4 +1,4 @@
-# Séance 1
+# Séance 1 [![Build Status](https://travis-ci.org/centralelille/2017-2018-poo4-seance1.svg?branch=master)](https://travis-ci.org/centralelille/2017-2018-poo4-seance1)
 
 ## Java
 
