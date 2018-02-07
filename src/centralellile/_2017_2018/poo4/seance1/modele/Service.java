@@ -40,7 +40,7 @@ public class Service implements Serializable {
 		private static final long serialVersionUID = 1L;
 		// La clé primaire sera
 		// générée automatiquement et dans la base de donnée la colonne devra s’appeler
-		// SERVNO. 
+		// SERVNO.
 		@Id
 		@Column(name = "SERVNO")
 		@GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,7 +55,7 @@ public class Service implements Serializable {
 				nullable = false
 		)
 		private String nom;
-		 @Column(
+		@Column(
 				name="LOCALISATION",
 				length = 64,
 				nullable = false

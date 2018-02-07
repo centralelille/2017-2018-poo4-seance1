@@ -6,7 +6,10 @@ gulp.task("lint", function() {
 		.pipe(lintspaces({
 			trailingspaces: true,
 			indentation: 'tabs',
-			newlineMaximum: 2
+			newlineMaximum: 2,
+			ignores: [
+				'java-comments'
+		]
 		}))
 		.pipe(lintspaces.reporter());
 });
