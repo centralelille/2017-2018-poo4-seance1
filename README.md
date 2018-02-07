@@ -1,6 +1,6 @@
 # Séance 1
 
-## Oracle Java
+## Java
 
 ### Resources
 - https://stackoverflow.com/questions/25289482/installing-jdk8-on-ubuntu-unable-to-locate-package-update-doesnt-fix/31869659#31869659
