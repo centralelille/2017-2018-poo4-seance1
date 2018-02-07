@@ -1,0 +1,6 @@
+language: java
+node_js:
+  - "8"
+
+script:
+  - gulp lint
