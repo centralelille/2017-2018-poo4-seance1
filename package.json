@@ -1,0 +1,28 @@
+{
+  "name": "2017-2018-poo4-seance1",
+  "version": "1.0.0",
+  "description": "## Java",
+  "main": "gulpfile.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-lintspaces": "^0.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centralelille/2017-2018-poo4-seance1.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/centralelille/2017-2018-poo4-seance1/issues"
+  },
+  "homepage": "https://github.com/centralelille/2017-2018-poo4-seance1#readme"
+}
