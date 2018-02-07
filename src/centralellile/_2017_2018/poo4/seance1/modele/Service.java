@@ -24,6 +24,7 @@
 package centralellile._2017_2018.poo4.seance1.modele;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,42 +37,91 @@ import javax.persistence.Id;
 @Entity
 public class Service implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+		private static final long serialVersionUID = 1L;
+		// La clé primaire sera
+		// générée automatiquement et dans la base de donnée la colonne devra s’appeler
+		// SERVNO. 
+		@Id
+		@Column(name = "SERVNO")
+		@GeneratedValue(strategy = GenerationType.AUTO)
+		private int id;
+		// Les noms doivent être uniques, et le nom et la localisation doivent
+		// avoir une taille maximale et être non nuls. Ils doivent aussi être écrits en majus-
+		// cules pour éviter les problèmes liés à la casse
+		@Column(
+				name="NOM",
+				length = 64,
+				unique = true,
+				nullable = false
+		)
+		private String nom;
+		 @Column(
+				name="LOCALISATION",
+				length = 64,
+				nullable = false
+		)
+		private String localisation;
 
-    public int getId() {
-        return id;
-    }
+		public Service(String nom, String localisation) {
+				setNom(nom);
+				setLocalisation(localisation);
+		}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+		public Service() {
+				setNom("Default Name");
+				setLocalisation("Default Localisation");
+		}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (int) id;
-        return hash;
-    }
+		public int getId() {
+			return id;
+		}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Service)) {
-            return false;
-        }
-        Service other = (Service) object;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
+		public void setId(int id) {
+				this.id = id;
+		}
 
-    @Override
-    public String toString() {
-        return "centralellile._2017_2018.poo4.seance1.modele.Service[ id=" + id + " ]";
-    }
-    
+		public String getNom() {
+				return nom;
+		}
+
+		public void setNom(String nom) {
+				this.nom = nom.toUpperCase();
+		}
+
+		public String getLocalisation() {
+				return localisation;
+		}
+
+		public void setLocalisation(String localisation) {
+				this.localisation = localisation.toUpperCase();
+		}
+
+		@Override
+		public int hashCode() {
+				int hash = 0;
+				hash += (int) id;
+				return hash;
+		}
+
+		// il faut éviter de se baser sur l’identifiant généré
+		// automatiquement pour l’égalité car l’identifiant n’est généré que lorsque l’entité
+		// est rendue persistante dans la base
+		@Override
+		public boolean equals(Object object) {
+				// TODO: Warning - this method won't work in the case the id fields are not set
+				if (!(object instanceof Service)) {
+						return false;
+				}
+				Service other = (Service) object;
+				if (this.id != other.id) {
+						return false;
+				}
+				return true;
+		}
+
+		@Override
+		public String toString() {
+				return "{id: "+this.id+", nom: "+this.nom+", localisation:"+this.localisation+"}";
+		}
+
 }

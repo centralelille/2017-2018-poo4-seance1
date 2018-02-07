@@ -72,4 +72,7 @@ chmod +x ./netbeans-8.2-javaee-linux.sh
   - Pu name : 2017-2018-poo4-seance1-pu
   - Database Connection : jdbc:derby...
 
+## Tools conf
+- [Use tabs](https://stackoverflow.com/questions/1949014/how-can-i-configure-netbeans-to-insert-tabs-instead-of-a-bunch-of-spaces)
+
 
