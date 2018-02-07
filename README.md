@@ -1,6 +1,6 @@
-# Séance 1
+# Séance 1 [![Build Status](https://travis-ci.org/centralelille/2017-2018-poo4-seance1.svg?branch=master)](https://travis-ci.org/centralelille/2017-2018-poo4-seance1)
 
-## Oracle Java
+## Java
 
 ### Resources
 - https://stackoverflow.com/questions/25289482/installing-jdk8-on-ubuntu-unable-to-locate-package-update-doesnt-fix/31869659#31869659
