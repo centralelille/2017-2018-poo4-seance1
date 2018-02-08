@@ -62,9 +62,7 @@ public class Test1 {
 				emf.close();
 			}
 		}
-		
-		
-		
-	
+
 	}
+
 }
