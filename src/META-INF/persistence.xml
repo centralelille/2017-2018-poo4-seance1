@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="2017-2018-poo4-seance1-pu" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="HopitalPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>centralellile._2017_2018.poo4.seance1.modele.Service</class>
+    <class>modele.Service</class>
+    <class>modele.Medecin</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/database"/>
-      <property name="javax.persistence.jdbc.user" value="username"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/hopital"/>
+      <property name="javax.persistence.jdbc.user" value="hopital"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="password"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.jdbc.password" value="latipoh"/>
+      <property name="javax.persistence.schema-generation.database.action" value="none"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="both"/>
     </properties>
   </persistence-unit>
 </persistence>
