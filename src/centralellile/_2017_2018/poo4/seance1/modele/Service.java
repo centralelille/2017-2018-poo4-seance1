@@ -24,11 +24,18 @@
 package centralellile._2017_2018.poo4.seance1.modele;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -37,91 +44,141 @@ import javax.persistence.Id;
 @Entity
 public class Service implements Serializable {
 
-		private static final long serialVersionUID = 1L;
-		// La clé primaire sera
-		// générée automatiquement et dans la base de donnée la colonne devra s’appeler
-		// SERVNO.
-		@Id
-		@Column(name = "SERVNO")
-		@GeneratedValue(strategy = GenerationType.AUTO)
-		private int id;
-		// Les noms doivent être uniques, et le nom et la localisation doivent
-		// avoir une taille maximale et être non nuls. Ils doivent aussi être écrits en majus-
-		// cules pour éviter les problèmes liés à la casse
-		@Column(
-				name="NOM",
-				length = 64,
-				unique = true,
-				nullable = false
-		)
-		private String nom;
-		@Column(
-				name="LOCALISATION",
-				length = 64,
-				nullable = false
-		)
-		private String localisation;
+    private static final long serialVersionUID = 1L;
+    // La clé primaire sera
+    // générée automatiquement et dans la base de donnée la colonne devra s’appeler
+    // SERVNO.
+    @Id
+    @Column(name = "SERVNO")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    // Les noms doivent être uniques, et le nom et la localisation doivent
+    // avoir une taille maximale et être non nuls. Ils doivent aussi être écrits en majus-
+    // cules pour éviter les problèmes liés à la casse
+    @Column(
+	    name = "NOM",
+	    length = 64,
+	    unique = true,
+	    nullable = false
+    )
+    private String nom;
+    @Column(
+	    name = "LOCALISATION",
+	    length = 64,
+	    nullable = false
+    )
+    private String localisation;
 
-		public Service(String nom, String localisation) {
-				setNom(nom);
-				setLocalisation(localisation);
-		}
+    //Permet de stocker tous les médecins d'un service
+    @OneToMany(mappedBy = "service",
+	    cascade = {
+		CascadeType.PERSIST
+	    })
+    private Set<Medecin> regroupe;
 
-		public Service() {
-				setNom("Default Name");
-				setLocalisation("Default Localisation");
-		}
+    //Permet de stocker le chef du service
+    @ManyToOne
+    @JoinColumn(name = "ID_MEDECIN_DIRIGE")
+    private Medecin dirigePar;
 
-		public int getId() {
-			return id;
-		}
+    public Service(String nom, String localisation) {
+	this();
+	setNom(nom);
+	setLocalisation(localisation);
+    }
 
-		public void setId(int id) {
-				this.id = id;
-		}
+    public Service() {
+	setNom("Default Name");
+	setLocalisation("Default Localisation");
+	this.regroupe = new HashSet<>();
+    }
 
-		public String getNom() {
-				return nom;
-		}
+    public int getId() {
+	return id;
+    }
 
-		public void setNom(String nom) {
-				this.nom = nom.toUpperCase();
-		}
+    public String getNom() {
+	return nom;
+    }
 
-		public String getLocalisation() {
-				return localisation;
-		}
+    public void setNom(String nom) {
+	this.nom = nom.toUpperCase();
+    }
 
-		public void setLocalisation(String localisation) {
-				this.localisation = localisation.toUpperCase();
-		}
+    public String getLocalisation() {
+	return localisation;
+    }
 
-		@Override
-		public int hashCode() {
-				int hash = 0;
-				hash += (int) id;
-				return hash;
-		}
+    public void setLocalisation(String localisation) {
+	this.localisation = localisation.toUpperCase();
+    }
 
-		// il faut éviter de se baser sur l’identifiant généré
-		// automatiquement pour l’égalité car l’identifiant n’est généré que lorsque l’entité
-		// est rendue persistante dans la base
-		@Override
-		public boolean equals(Object object) {
-				// TODO: Warning - this method won't work in the case the id fields are not set
-				if (!(object instanceof Service)) {
-						return false;
-				}
-				Service other = (Service) object;
-				if (this.id != other.id) {
-						return false;
-				}
-				return true;
-		}
+    @Override
+    public int hashCode() {
+	int hash = 0;
+	hash += (int) id;
+	return hash;
+    }
 
-		@Override
-		public String toString() {
-				return "{id: "+this.id+", nom: "+this.nom+", localisation:"+this.localisation+"}";
-		}
+    //dirigePar
+    public Medecin getDirigePar() {
+	return dirigePar;
+    }
+
+    public void setDirigePar(Medecin m) {
+	if (this.dirigePar != null) {
+	    Medecin oldDirigePar = this.dirigePar;
+	    oldDirigePar.getServiceDirige().remove(this);
+	}
+	this.dirigePar = m;
+    }
+
+    //regroupe
+    public Set<Medecin> getRegroupe() {
+	return regroupe;
+    }
+
+    public boolean addMedecin(Medecin m) {
+	if (regroupe.add(m)) {
+	    m.setService(this);
+	    return true;
+	}
+	return false;
+    }
+
+    // il faut éviter de se baser sur l’identifiant généré
+    // automatiquement pour l’égalité car l’identifiant n’est généré que lorsque l’entité
+    // est rendue persistante dans la base
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj) {
+	    return true;
+	}
+	if (obj == null) {
+	    return false;
+	}
+	if (getClass() != obj.getClass()) {
+	    return false;
+	}
+	final Service other = (Service) obj;
+	if (!Objects.equals(this.nom, other.nom)) {
+	    return false;
+	}
+	if (!Objects.equals(this.localisation, other.localisation)) {
+	    return false;
+	}
+	if (!Objects.equals(this.regroupe, other.regroupe)) {
+	    return false;
+	}
+	if (!Objects.equals(this.dirigePar, other.dirigePar)) {
+	    return false;
+	}
+	return true;
+    }
+
+    @Override
+    public String toString() {
+	return "{id: " + this.id + ", nom: " + this.nom + ", localisation:" + this.localisation + "}";
+    }
 
 }
