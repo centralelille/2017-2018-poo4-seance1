@@ -64,7 +64,6 @@ public class Test4 {
                 med5.addServiceDirige(serv1);
                 med5.addServiceDirige(serv3);
                 med2.setChef(med1); // Ajout du médecin 1 comme chef du médecin 2           
-                med1.setChef(med2);
                 med3.setChef(med1);
                 med5.setChef(med6);
                 
