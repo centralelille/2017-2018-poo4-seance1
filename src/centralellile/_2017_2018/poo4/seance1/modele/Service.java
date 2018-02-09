@@ -1,127 +1,145 @@
 /*
- * The MIT License
- *
- * Copyright 2018 Team SI.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package centralellile._2017_2018.poo4.seance1.modele;
+package modele;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
- *
- * @author user
+ * Entité représentant un service
+ * @author seb
  */
 @Entity
 public class Service implements Serializable {
 
-		private static final long serialVersionUID = 1L;
-		// La clé primaire sera
-		// générée automatiquement et dans la base de donnée la colonne devra s’appeler
-		// SERVNO.
-		@Id
-		@Column(name = "SERVNO")
-		@GeneratedValue(strategy = GenerationType.AUTO)
-		private int id;
-		// Les noms doivent être uniques, et le nom et la localisation doivent
-		// avoir une taille maximale et être non nuls. Ils doivent aussi être écrits en majus-
-		// cules pour éviter les problèmes liés à la casse
-		@Column(
-				name="NOM",
-				length = 64,
-				unique = true,
-				nullable = false
-		)
-		private String nom;
-		@Column(
-				name="LOCALISATION",
-				length = 64,
-				nullable = false
-		)
-		private String localisation;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name="SERVNO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;    
+    
+    @Column(name="SERVNAME",length = 50,unique = true,nullable = false)
+    private String nom;
+    
+    @Column(name="SERVLOCALISATION",length = 50,nullable = false)
+    private String localisation;
+    
+    @OneToMany(mappedBy="service",
+            cascade=CascadeType.PERSIST)
+    private Set<Medecin> ensMedecins;   
+    
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="manager")
+    private Medecin manager;
 
-		public Service(String nom, String localisation) {
-				setNom(nom);
-				setLocalisation(localisation);
-		}
+    /**
+     * Constructeur par défault
+     */
+    public Service() {
+        this.ensMedecins = new HashSet<>();
+    }
 
-		public Service() {
-				setNom("Default Name");
-				setLocalisation("Default Localisation");
-		}
+    /**
+     * Constructeur par données
+     * @param nom
+     * @param localisation 
+     */
+    public Service(String nom, String localisation) {
+        this();
+        this.nom = nom.toUpperCase();
+        this.localisation = localisation;
+    }
+    
+    public Long getId() {
+        return id;
+    }
 
-		public int getId() {
-			return id;
-		}
+    public String getNom() {
+        return nom;
+    }
 
-		public void setId(int id) {
-				this.id = id;
-		}
+    public String getLocalisation() {
+        return localisation;
+    }
 
-		public String getNom() {
-				return nom;
-		}
+    public Medecin getManager() {
+        return manager;
+    }
 
-		public void setNom(String nom) {
-				this.nom = nom.toUpperCase();
-		}
+    public Collection<Medecin> getEnsMedecins() {
+        return new HashSet<>(ensMedecins);
+    }    
 
-		public String getLocalisation() {
-				return localisation;
-		}
+    public void setLocalisation(String localisation) {
+        this.localisation = localisation;
+    }  
 
-		public void setLocalisation(String localisation) {
-				this.localisation = localisation.toUpperCase();
-		}
+    public void setManager(Medecin manager) {
+        this.manager = manager;
+    }
+        
+    /**
+     * Permet d'ajouter un médecin à un service
+     * @param m
+     * @return 
+     */
+    public boolean addMedecin(Medecin m){
+        Service s_old = m.getService();
+        if(ensMedecins.add(m)){
+            if(s_old != null){
+                s_old.ensMedecins.remove(m);                
+            }  
+            m.setService(this);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (nom != null ? nom.hashCode() : 0);
+        return hash;
+    }
 
-		@Override
-		public int hashCode() {
-				int hash = 0;
-				hash += (int) id;
-				return hash;
-		}
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Service)) {
+            return false;
+        }
+        Service other = (Service) object;
+        if ((this.nom == null && other.nom.toUpperCase()!= null) || 
+                (this.nom != null && !this.nom.equals(other.nom.toUpperCase()))) {
+            return false;
+        }
+        return true;
+    }
 
-		// il faut éviter de se baser sur l’identifiant généré
-		// automatiquement pour l’égalité car l’identifiant n’est généré que lorsque l’entité
-		// est rendue persistante dans la base
-		@Override
-		public boolean equals(Object object) {
-				// TODO: Warning - this method won't work in the case the id fields are not set
-				if (!(object instanceof Service)) {
-						return false;
-				}
-				Service other = (Service) object;
-				if (this.id != other.id) {
-						return false;
-				}
-				return true;
-		}
-
-		@Override
-		public String toString() {
-				return "{id: "+this.id+", nom: "+this.nom+", localisation:"+this.localisation+"}";
-		}
-
+    @Override
+    public String toString() {
+        String result = "Service " + id + " [\n\tNom : " + nom + "\n\tLocalisation : " + localisation;
+        result += "\n\t contient : \n\t";
+        for(Medecin m : ensMedecins){
+            result += m.toString();
+        }
+        return result + "\n]";
+    }
+    
 }
