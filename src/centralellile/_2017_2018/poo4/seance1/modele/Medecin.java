@@ -24,7 +24,7 @@ import javax.persistence.UniqueConstraint;
 
 /**
  * Entité représentant un médecin
- * @author seb
+ * @author user
  */
 @Entity
 @Table(name="MEDECIN",
@@ -59,8 +59,7 @@ public class Medecin implements Serializable {
             cascade=CascadeType.PERSIST)
     private Set<Service> ensServicesDiriges; 
     
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="chef")
+    @ManyToOne
     private Medecin chef;
     
     @OneToMany(mappedBy="chef",
@@ -145,10 +144,8 @@ public class Medecin implements Serializable {
      * @return 
      */
     public boolean setChef(Medecin m) {
-        if(m == this)
-            return false;
-        if(m == chef)
-            return true;
+        if(m == this) return false;
+        if(m == chef) return true;
         
         if(chef != null) {
             chef.subordonnes.remove(this);

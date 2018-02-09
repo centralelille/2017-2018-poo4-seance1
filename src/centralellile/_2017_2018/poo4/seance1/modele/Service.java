@@ -21,7 +21,7 @@ import javax.persistence.OneToMany;
 
 /**
  * Entité représentant un service
- * @author seb
+ * @author user
  */
 @Entity
 public class Service implements Serializable {

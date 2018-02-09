@@ -13,7 +13,7 @@ import modele.Service;
 
 /**
  * Représente les tests sur le service
- * @author seb
+ * @author user
  */
 public class Test1 {
     public static void main(String[] args) {

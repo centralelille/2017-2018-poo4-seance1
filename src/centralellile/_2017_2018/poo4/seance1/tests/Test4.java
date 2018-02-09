@@ -14,7 +14,7 @@ import modele.Service;
 
 /**
  * Représente les tests sur les associations médecins et services
- * @author seb
+ * @author user
  */
 public class Test4 {
     public static void main(String[] args) {
@@ -43,9 +43,9 @@ public class Test4 {
                 serv3.addMedecin(med6);
                 med4.addServiceDirige(serv2);
                 med5.addServiceDirige(serv1);
-                med5.addServiceDirige(serv3);                
-                med2.setChef(med1); // Ajout du médecin 1 comme chef du médecin 2
-                med3.setChef(med1);
+                med5.addServiceDirige(serv3);
+                med1.setChef(med2);
+                med1.setChef(med3);
                 med5.setChef(med6);
                 
                 em.persist(serv1);

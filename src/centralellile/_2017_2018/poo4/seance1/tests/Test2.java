@@ -13,7 +13,7 @@ import modele.Medecin;
 
 /**
  * Représente les tests sur les médecins
- * @author seb
+ * @author user
  */
 public class Test2 {
     public static void main(String[] args) {

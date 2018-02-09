@@ -14,7 +14,7 @@ import modele.Service;
 
 /**
  * Représente les tests sur les associations médecins et services
- * @author seb
+ * @author user
  */
 public class Test3 {
     public static void main(String[] args) {
