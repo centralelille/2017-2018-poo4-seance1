@@ -142,7 +142,7 @@ public class Service implements Serializable {
 			return false;
 		}
 		Service other = (Service) object;
-		if ((this.nom == null && other.nom.toUpperCase()!= null) || 
+		if ((this.nom == null && other.nom.toUpperCase()!= null) ||
 			(this.nom != null && !this.nom.equals(other.nom.toUpperCase()))) {
 			return false;
 		}

@@ -74,7 +74,7 @@ public class Medecin implements Serializable {
 	private Service service;
 
 	@OneToMany(mappedBy="manager",cascade=CascadeType.PERSIST)
-	private Set<Service> ensServicesDiriges; 
+	private Set<Service> ensServicesDiriges;
 
 	@ManyToOne
 	private Medecin chef;
