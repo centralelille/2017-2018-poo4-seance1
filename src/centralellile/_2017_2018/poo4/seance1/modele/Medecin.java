@@ -54,36 +54,34 @@ import javax.persistence.UniqueConstraint;
 public class Medecin implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name="MEDENO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name="MEDENAME",length = 50,nullable = false)
 	private String nom;
-	
+
 	@Column(name="MEDEFIRSTNAME",length = 50,nullable = false)
 	private String prenom;
-	
+
 	@Column(name="MEDESALARY",scale = 2, nullable = false)
 	private double salaire;
-	
+
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="service")
 	private Service service;
-	
-	@OneToMany(mappedBy="manager",
-			cascade=CascadeType.PERSIST)
+
+	@OneToMany(mappedBy="manager",cascade=CascadeType.PERSIST)
 	private Set<Service> ensServicesDiriges; 
 	
 	@ManyToOne
 	private Medecin chef;
-	
-	@OneToMany(mappedBy="chef",
-			cascade=CascadeType.PERSIST)
+
+	@OneToMany(mappedBy="chef",cascade=CascadeType.PERSIST)
 	private Set<Medecin> subordonnes;
-	
+
 	/**
 	 * Constructeur par défault
 	 */
@@ -120,11 +118,11 @@ public class Medecin implements Serializable {
 	public double getSalaire() {
 		return salaire;
 	}
-	
+
 	public Service getService() {
 		return service;
 	}
-	
+
 	public Collection<Service> getEnsServicesDiriges(){
 		return new HashSet<>(ensServicesDiriges);
 	}
@@ -155,7 +153,7 @@ public class Medecin implements Serializable {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Définis le médecin en chef
 	 * @param m
@@ -211,5 +209,5 @@ public class Medecin implements Serializable {
 		}
 		return result+"\n]";
 	}
-	
+
 }

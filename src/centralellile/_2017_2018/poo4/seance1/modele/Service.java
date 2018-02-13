@@ -49,17 +49,16 @@ public class Service implements Serializable {
 	@Column(name="SERVNO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;	
-	
+
 	@Column(name="SERVNAME",length = 50,unique = true,nullable = false)
 	private String nom;
-	
+
 	@Column(name="SERVLOCALISATION",length = 50,nullable = false)
 	private String localisation;
-	
-	@OneToMany(mappedBy="service",
-			cascade=CascadeType.PERSIST)
+
+	@OneToMany(mappedBy="service",cascade=CascadeType.PERSIST)
 	private Set<Medecin> ensMedecins;   
-	
+
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="manager")
 	private Medecin manager;
@@ -81,7 +80,7 @@ public class Service implements Serializable {
 		this.nom = nom.toUpperCase();
 		this.localisation = localisation;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -109,7 +108,7 @@ public class Service implements Serializable {
 	public void setManager(Medecin manager) {
 		this.manager = manager;
 	}
-		
+	
 	/**
 	 * Permet d'ajouter un médecin à un service
 	 * @param m
@@ -128,7 +127,7 @@ public class Service implements Serializable {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public int hashCode() {
 		int hash = 0;
@@ -159,5 +158,5 @@ public class Service implements Serializable {
 		}
 		return result + "\n]";
 	}
-	
+
 }
