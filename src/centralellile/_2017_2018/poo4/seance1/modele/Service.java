@@ -48,7 +48,7 @@ public class Service implements Serializable {
 	@Id
 	@Column(name="SERVNO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
 
 	@Column(name="SERVNAME",length = 50,unique = true,nullable = false)
 	private String nom;
@@ -57,7 +57,7 @@ public class Service implements Serializable {
 	private String localisation;
 
 	@OneToMany(mappedBy="service",cascade=CascadeType.PERSIST)
-	private Set<Medecin> ensMedecins;   
+	private Set<Medecin> ensMedecins;
 
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="manager")
@@ -73,7 +73,7 @@ public class Service implements Serializable {
 	/**
 	 * Constructeur par données
 	 * @param nom
-	 * @param localisation 
+	 * @param localisation
 	 */
 	public Service(String nom, String localisation) {
 		this();
@@ -99,27 +99,27 @@ public class Service implements Serializable {
 
 	public Collection<Medecin> getEnsMedecins() {
 		return new HashSet<>(ensMedecins);
-	}	
+	}
 
 	public void setLocalisation(String localisation) {
 		this.localisation = localisation;
-	}  
+	}
 
 	public void setManager(Medecin manager) {
 		this.manager = manager;
 	}
-	
+
 	/**
 	 * Permet d'ajouter un médecin à un service
 	 * @param m
-	 * @return 
+	 * @return
 	 */
 	public boolean addMedecin(Medecin m){
 		Service s_old = m.getService();
 		if(ensMedecins.add(m)){
 			if(s_old != null){
-				s_old.ensMedecins.remove(m);				
-			}  
+				s_old.ensMedecins.remove(m);
+			}
 			m.setService(this);
 			return true;
 		}
@@ -143,7 +143,7 @@ public class Service implements Serializable {
 		}
 		Service other = (Service) object;
 		if ((this.nom == null && other.nom.toUpperCase()!= null) || 
-				(this.nom != null && !this.nom.equals(other.nom.toUpperCase()))) {
+			(this.nom != null && !this.nom.equals(other.nom.toUpperCase()))) {
 			return false;
 		}
 		return true;

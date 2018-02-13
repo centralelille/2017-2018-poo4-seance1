@@ -75,7 +75,7 @@ public class Medecin implements Serializable {
 
 	@OneToMany(mappedBy="manager",cascade=CascadeType.PERSIST)
 	private Set<Service> ensServicesDiriges; 
-	
+
 	@ManyToOne
 	private Medecin chef;
 
@@ -94,7 +94,7 @@ public class Medecin implements Serializable {
 	 * Constructeur par données
 	 * @param nom
 	 * @param prenom
-	 * @param salaire 
+	 * @param salaire
 	 */
 	public Medecin(String nom, String prenom, double salaire) {
 		this();
@@ -133,18 +133,18 @@ public class Medecin implements Serializable {
 
 	public void setService(Service service) {
 		this.service = service;
-	}	
+	}
 
 	/**
 	 * Ajouter un service à la liste des services dirigés par un médecin
 	 * @param s
-	 * @return 
+	 * @return
 	 */
 	public boolean addServiceDirige(Service s) {
 		Medecin m_old = s.getManager();
 		if(ensServicesDiriges.add(s)){
 			if(m_old != null){
-				m_old.ensServicesDiriges.remove(s);				
+				m_old.ensServicesDiriges.remove(s);
 			}
 			s.setManager(this);
 			return true;
@@ -157,12 +157,12 @@ public class Medecin implements Serializable {
 	/**
 	 * Définis le médecin en chef
 	 * @param m
-	 * @return 
+	 * @return
 	 */
 	public boolean setChef(Medecin m) {
 		if(m == this) return false;
 		if(m == chef) return true;
-		
+
 		if(chef != null) {
 			chef.subordonnes.remove(this);
 		}
@@ -198,11 +198,11 @@ public class Medecin implements Serializable {
 			return false;
 		}
 		return true;
-	}   
+	}
 
 	@Override
 	public String toString() {
-		String result = "Médecin "+ id + " [\n\tNom :" + nom + "\n\tPrénom :" + prenom + 
+		String result = "Médecin "+ id + " [\n\tNom :" + nom + "\n\tPrénom :" + prenom +
 				"\n\tSalaire :" + salaire + "\n\tDirige les services ";
 		for(Service s : ensServicesDiriges){
 			result += s.getNom() + " - " + s.getLocalisation();
