@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package tests;
+package centralellile._2017_2018.poo4.seance1.tests;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

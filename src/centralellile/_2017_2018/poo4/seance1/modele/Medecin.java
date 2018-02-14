@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package modele;
+package centralellile._2017_2018.poo4.seance1.modele;
 
 import java.io.Serializable;
 import java.util.Collection;
