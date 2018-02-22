@@ -1,4 +1,4 @@
-# Session 1 [![Build Status](https://travis-ci.org/eleves-ig2i/ig2i-le4-poo-2018-tp1.svg?branch=master)](https://travis-ci.org/eleves-ig2i/ig2i-le4-poo-2018-tp1)
+# Session 1 [![Build Status](https://travis-ci.org/eleves-ig2i/ig2i-le4-poo-2018-tp1.svg?branch=master)](https://travis-ci.org/eleves-ig2i/ig2i-le4-poo-2018-tp1) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Description
 
@@ -69,7 +69,7 @@ chmod +x ./netbeans-8.2-javaee-linux.sh
 ./netbeans-8.2-javaee-linux.sh
 ```
 ### Installing
-#### Create Project
+#### Create the project
 - File > New Project > Java > Java Application
   - Project Name : 2017-2018-poo4-seance1
   - Project Location : ~
@@ -100,7 +100,7 @@ chmod +x ./netbeans-8.2-javaee-linux.sh
   - [Import] > Java DB Driver
   - [Add Library]
 
-#### Percistance Unit
+#### Persistance Unit
 - centralellile._2017_2018.poo4.seance1 > new > other > Persistence > Persitence Unit > ...
   - Pu name : 2017-2018-poo4-seance1-pu
   - Database Connection : jdbc:derby...
@@ -112,5 +112,5 @@ chmod +x ./netbeans-8.2-javaee-linux.sh
 * [Loïc BOURGOIS](https://github.com/loicbourgois)
 * [Sébastien CORNUEL](https://github.com/Hercules0402)
 
-## License [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+## License
 This TP is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
