@@ -1,5 +1,5 @@
 {
-  "name": "2017-2018-poo4-seance1",
+  "name": "ig2i-le4-poo-2018-tp1",
   "version": "1.0.0",
   "description": "## Java",
   "main": "gulpfile.js",
@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/centralelille/2017-2018-poo4-seance1.git"
+    "url": "git+https://github.com/eleves-ig2i/ig2i-le4-poo-2018-tp1.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/centralelille/2017-2018-poo4-seance1/issues"
+    "url": "https://github.com/eleves-ig2i/ig2i-le4-poo-2018-tp1/issues"
   },
-  "homepage": "https://github.com/centralelille/2017-2018-poo4-seance1#readme"
+  "homepage": "https://github.com/eleves-ig2i/ig2i-le4-poo-2018-tp1#readme"
 }
