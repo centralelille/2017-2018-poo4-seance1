@@ -1,6 +1,4 @@
-language: node_js
-node_js:
-  - "8"
-
 script:
-  - gulp lint
+  - npm install linteverything@latest
+  - printf "module.exports={ignore:['node_modules','package-lock.json','.git','.travis.yml','lib','Sujet séance n°1 - Hôpital.pdf'],verbose:true};" > .linteverythingrc.js
+  - node ./node_modules/linteverything/bin/linteverything.js
